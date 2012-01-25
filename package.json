@@ -1,0 +1,32 @@
+{
+  "name": "vr",
+  "version": "0.1.0",
+  "author": "Jani Luukko <jj.luukko@gmail.com>",
+  "description": "Wrapper for fetching info from VR's Junat kartalla-service",
+  "contributors": [ 
+    {
+      "name": "Jani Luukko",
+      "email": "jj.luukko@gmail.com"
+    } 
+  ],
+  "main": "./lib/vr",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JaniL/vr.git"
+  },
+  "keywords": [
+    "vr",
+    "train",
+    "finnish",
+    "api"
+  ],
+  "dependencies" : {
+    "xmlson"    :  "*",
+    "request" :  "2.9.x"
+  },
+  "noAnalyze": false,
+  "engine": {
+    "node": ">=0.6.2"
+  }
+}
+

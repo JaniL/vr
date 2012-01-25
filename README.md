@@ -5,8 +5,10 @@ This is a node.js module for fetching info from VR's Junat kartalla-service.
 You can fetch info from different stations and trains.
 
 Many thanks to Apps4Finland for documenting the API: http://apps4finland.fi/fi/data/junat-kartalla-palvelun-rajapinta/
+
 They want to notify that the service is still in the development, can change or might go down.
-Also apparently this shouldn't be used, unless you are making an entry to Apps4Finland contest.
+
+Also this shouldn't be used, unless you are making an entry to Apps4Finland contest.
 
 ## Install
 

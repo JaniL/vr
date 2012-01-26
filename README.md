@@ -8,7 +8,7 @@ Many thanks to Apps4Finland for documenting the API: http://apps4finland.fi/fi/d
 
 They want to notify that the service is still in the development, can change or might go down.
 
-Also this shouldn't be used, unless you are making an entry to Apps4Finland contest.
+They also mention that this API is given to use for Apps4Finland contestants.
 
 ## Install
 

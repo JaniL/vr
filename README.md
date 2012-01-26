@@ -16,13 +16,25 @@ Also this shouldn't be used, unless you are making an entry to Apps4Finland cont
   npm install vr
 </pre>
 
+## Useful information
+
+Stations are named by codes. The list of the train stations with their code is available at:
+
+http://www.vr.fi/fi/index/palvelut/mobiilipalvelut/popup_asemien_tunnukset.html
+
+Also, the service also gives you information about whetever train in canceled or why it is delayed with code names.
+
+The list of them is available at Finnish Transport Agency's site:
+
+http://www2.liikennevirasto.fi/julkaisut/pdf4/rhk_2008-a1_aikataulusuunnittelu_ja_web.pdf
+
 ## How to use
 
 There's three methods in this module.
 
 ### getStationInfo
 
-Gives you station's departing and arriving trains. You need to use code names for station names. For example, Lahti is LH.
+Gives you station's departing and arriving trains. You need to use code name of the station. For example, Lahti is LH.
 
 <pre>
   var vr = require('vr');

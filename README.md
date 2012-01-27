@@ -22,7 +22,7 @@ Stations are named by codes. The list of the train stations with their code is a
 
 http://www.vr.fi/fi/index/palvelut/mobiilipalvelut/popup_asemien_tunnukset.html
 
-Also, the service also gives you information about whetever train in canceled or why it is delayed with code names.
+Also, the service also gives you information about whetever train is canceled or why it is delayed with code names.
 
 The list of them is available at Finnish Transport Agency's site:
 

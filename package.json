@@ -21,9 +21,9 @@
     "api"
   ],
   "dependencies" : {
-    "xml2js"    :  "0.4.x",
+    "xml2js"    : "0.4.x",
     "request" :  "2.9.x",
-    "underscore" "1.5.x"
+    "underscore": "1.5.x"
   },
   "noAnalyze": false,
   "engine": {

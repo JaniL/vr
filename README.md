@@ -1,68 +1,90 @@
 # vr.js
 
-This is a node.js module for fetching info from VR's Junat kartalla-service.
+Node.js wrapper for Finnish railway traffic data from Digitraffic.
 
-You can fetch info from different stations and trains.
+This package now uses the modern Digitraffic API:
 
-Documentation of the API is available here:
-
-http://www.vr.fi/fi/index/palvelut/avoin_data/Junatkartalla-rajapinta.html
+- `https://www.digitraffic.fi/rautatieliikenne/`
+- `https://rata.digitraffic.fi/swagger/`
 
 ## Install
 
-<pre>
-  npm install vr
-</pre>
+```bash
+npm install vr
+```
 
-## Useful information
+## Node support
 
-Stations are named by codes. The list of the train stations with their code is available at:
+`>=16`
 
-http://www.vr.fi/fi/index/palvelut/mobiilipalvelut/popup_asemien_tunnukset.html
+## Deprecation notice
 
-Also, the service also gives you information about whetever train is canceled or why it is delayed with code names.
+The old callback API is still available for compatibility, but deprecated:
 
-The list of them is available at Finnish Transport Agency's site:
+- `getStationInfo(stationCode, cb)`
+- `getTrains(cb)`
+- `getTrain(guid, cb)`
 
-http://www2.liikennevirasto.fi/julkaisut/pdf4/rhk_2008-a1_aikataulusuunnittelu_ja_web.pdf
+These methods keep the legacy response shape on a best-effort basis.
 
-## How to use
+## Modern API (recommended)
 
-There's three methods in this module.
+```js
+const vr = require("vr");
 
-### getStationInfo
+const client = vr.createClient();
 
-Gives you station's departing and arriving trains. You need to use code name of the station. For example, Lahti is LH.
-
-<pre>
-  var vr = require('vr');
-  
-  vr.getStationInfo('LH', function (info) {
-    console.log(info);
+async function main() {
+  const trainsAtHelsinki = await client.getStationLiveTrains("HKI", {
+    arrivedTrains: 5,
+    arrivingTrains: 5,
+    departedTrains: 5,
+    departingTrains: 5,
+    includeNonstopping: true,
   });
-</pre>
 
-### getTrains
+  const train = await client.getTrain(70, "latest");
+  const locations = await client.getLatestTrainLocations();
 
-Gives you all trains that are on the tracks at the moment.
+  console.log(trainsAtHelsinki.length, train && train.trainNumber, locations.length);
+}
 
-<pre>
-  var vr = require('vr');
-  
-  vr.getTrains(function (trains) {
-    console.log(trains);
-  });
-</pre>
+main().catch(console.error);
+```
 
-### getTrain
+## Legacy API (deprecated)
 
-Gives information about the stations that the train with given guid goes by. Also gives latitude/longitude, speed and direction of train.
-(Use guid from getStationInfo/getTrains in this.)
+```js
+const vr = require("vr");
 
-<pre>
-  var vr = require('vr');
-  
-  vr.getTrain('S79', function (train) {
-    console.log(train);
-  });
-</pre>
+vr.getStationInfo("HKI", function (err, info) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(info.station);
+  console.log(info["georss:point"]);
+  console.log(info.trains.length);
+});
+```
+
+## Old -> new API mapping
+
+- `getStationInfo(stationCode, cb)` -> `client.getStationLiveTrains(stationCode, options)` + `client.getStations()`
+- `getTrains(cb)` -> `client.getLatestTrainLocations()`
+- `getTrain(guid, cb)` -> `client.getTrain(trainNumber, departureDate?)` + `client.getTrainLocations(trainNumber, departureDate?)`
+
+## Notes on best-effort compatibility
+
+- Legacy `guid` parsing in `getTrain(guid, cb)` extracts the numeric train number from the string (for example, `"IC70" -> 70`, `"S79" -> 79`).
+- Some XML-era fields do not exist in Digitraffic anymore and are returned as `null`, empty string, or sensible fallback values.
+
+## Live integration test
+
+Run against real Digitraffic endpoints:
+
+```bash
+RUN_LIVE_TESTS=1 npm test
+```
+
+Without `RUN_LIVE_TESTS=1`, live tests are skipped.

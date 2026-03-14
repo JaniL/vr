@@ -2,6 +2,13 @@
 
 Node.js wrapper for Finnish railway traffic data from Digitraffic.
 
+## Maintenance status
+
+This library is not actively maintained.
+It is provided as-is primarily for legacy compatibility.
+Bug fixes and feature updates are not guaranteed.
+For new projects, prefer integrating with Digitraffic APIs directly.
+
 This package now uses the modern Digitraffic API:
 
 - `https://www.digitraffic.fi/rautatieliikenne/`

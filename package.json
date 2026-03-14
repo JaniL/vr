@@ -2,7 +2,7 @@
   "name": "vr",
   "version": "0.3.0",
   "author": "Jani Luukko <jj.luukko@gmail.com>",
-  "description": "Wrapper for fetching Finnish railway traffic data",
+  "description": "Wrapper for Finnish railway traffic data (legacy, not actively maintained)",
   "contributors": [ 
     {
       "name": "Jani Luukko",
@@ -19,7 +19,10 @@
     "vr",
     "train",
     "finnish",
-    "api"
+    "api",
+    "digitraffic",
+    "legacy",
+    "deprecated"
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
